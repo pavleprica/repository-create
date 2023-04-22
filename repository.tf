@@ -35,3 +35,15 @@ resource "github_branch_protection" "default_branch_protection" {
     required_approving_review_count = 1
   }
 }
+
+resource "github_repository_collaborator" "read_access_collaborators" {
+  for_each   = toset(var.users_with_read_access)
+  repository = github_repository.repository.id
+  username   = each.key
+}
+
+resource "github_repository_collaborator" "write_access_collaborators" {
+  for_each   = toset(var.users_with_push_access)
+  repository = github_repository.repository.id
+  username   = each.key
+}

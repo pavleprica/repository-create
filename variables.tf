@@ -45,3 +45,13 @@ variable "archive_on_destroy" {
 variable "gitignore_template" {
   type = string
 }
+
+variable "users_with_read_access" {
+  type    = list(string)
+  default = []
+}
+
+variable "users_with_push_access" {
+  type    = list(string)
+  default = []
+}
