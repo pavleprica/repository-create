@@ -39,11 +39,13 @@ resource "github_branch_protection" "default_branch_protection" {
 resource "github_repository_collaborator" "read_access_collaborators" {
   for_each   = toset(var.users_with_read_access)
   repository = github_repository.repository.id
+  permission = "pull"
   username   = each.key
 }
 
 resource "github_repository_collaborator" "write_access_collaborators" {
   for_each   = toset(var.users_with_push_access)
   repository = github_repository.repository.id
+  permission = "push"
   username   = each.key
 }
